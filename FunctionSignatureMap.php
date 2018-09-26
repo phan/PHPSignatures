@@ -296,7 +296,7 @@ return [
 'array_intersect_ukey' => ['array', 'arr1'=>'array', 'arr2'=>'array', 'key_compare_func'=>'callable(mixed,mixed):int'],
 'array_intersect_ukey\'1' => ['array', 'arr1'=>'array', 'arr2'=>'array', 'arr3'=>'array', 'arg4'=>'array|callable(mixed,mixed):int', '...rest'=>'array|callable(mixed,mixed):int'],
 'array_key_exists' => ['bool', 'key'=>'string|int', 'search'=>'array'],
-'array_keys' => ['array<int,string>|array<int,int>', 'input'=>'array', 'search_value='=>'', 'strict='=>'bool'],
+'array_keys' => ['array<int,string>|array<int,int>', 'input'=>'array', 'search_value='=>'mixed', 'strict='=>'bool'],
 'array_map' => ['array', 'callback'=>'?callable', 'input1'=>'array', '...args='=>'array'],
 'array_merge' => ['array', 'arr1'=>'array', '...args='=>'array'],
 'array_merge_recursive' => ['array', 'arr1'=>'array', '...args='=>'array'],
