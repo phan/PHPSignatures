@@ -1,0 +1,10 @@
+vendor
+\#*#
+.vscode/
+*.joblog
+*.swo
+*.swp
+*.zip
+/tags
+nohup.out
+.idea/
