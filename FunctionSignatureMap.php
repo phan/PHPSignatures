@@ -10296,7 +10296,6 @@ return [
 'Redis::set\'1' => ['bool', 'key'=>'string', 'value'=>'string', 'timeout='=>'int'],
 'Redis::setBit' => ['int', 'key'=>'string', 'offset'=>'int', 'value'=>'int'],
 'Redis::setEx' => ['bool', 'key'=>'string', 'ttl'=>'int', 'value'=>'string'],
-'Redis::setex' => ['bool', 'key'=>'string', 'ttl'=>'int', 'value'=>'string'],
 'Redis::setNx' => ['bool', 'key'=>'string', 'value'=>'string'],
 'Redis::setnx' => ['bool', 'key'=>'string', 'value'=>'string'],
 'Redis::setOption' => ['bool', 'name'=>'int', 'value'=>'int|string'],
