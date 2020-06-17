@@ -1,27 +1,39 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Phan\Language\Internal;
 
+// NOTE: PHP allows some code that would be a runtime error to be parsed, e.g. `$x->{2}()`.
+// Documenting all of these helps prevent Phan from crashing when analyzing it.
 $ordinary_ast_node = 'ast\Node|float|int|string';
 $ast_node_shape_inner = \implode(',', [
+    "__declId?:int",
     "args?:ast\Node",
     "catches?:ast\Node",
     "class?:ast\Node",
     "cond?:$ordinary_ast_node",
     "const?:string",
     "dim?:$ordinary_ast_node",
+    "declares?:ast\Node",
     "docComment?:?string",
     "expr?:$ordinary_ast_node",
+    "false?:$ordinary_ast_node",
     "finally?:ast\Node",
     "insteadof?:ast\Node",
     "key?:$ordinary_ast_node",
     "left?:$ordinary_ast_node",
-    "method?:ast\Node|string",
+    "method?:$ordinary_ast_node",
     "name?:$ordinary_ast_node",
+    "params?:ast\Node",
+    "prop?:$ordinary_ast_node",
     "right?:$ordinary_ast_node",
     "stmts?:?ast\Node",
     "try?:ast\Node",
+    "true?:$ordinary_ast_node",
+    "type?:?ast\Node",
     "value?:$ordinary_ast_node",
-    "var?:ast\Node",
+    "var?:$ordinary_ast_node",  // PHP can *parse* nonsense such as `2=$x;` in AST_ASSIGN
 ]);
 
 $ast_node_children_types = 'array{' . $ast_node_shape_inner . '}|ast\Node[]|int[]|string[]|float[]|null[]';
@@ -85,7 +97,7 @@ return [
     'arrayiterator' => ['name' => 'string'],
     'arrayobject' => ['name' => 'string'],
     'ast\metadata' => [
-        'flags' => 'array<int,string>',
+        'flags' => 'list<string>',
         'flagsCombinable' => 'bool',
         'kind' => 'int',
         'name' => 'string',
@@ -322,6 +334,12 @@ return [
     'pdoexception' => ['code' => 'string', 'errorInfo' => 'array'],
     'pdostatement' => ['queryString' => 'string'],
     'php_user_filter' => ['filtername' => 'string', 'params' => 'mixed'],
+    'phptoken' => [
+        'id' => 'int',
+        'line' => 'int',
+        'pos' => 'int',
+        'text' => 'string',
+    ],
     'recursivearrayiterator' => ['name' => 'string'],
     'recursivecachingiterator' => ['name' => 'string'],
     'recursivedirectoryiterator' => ['name' => 'string'],
@@ -383,8 +401,8 @@ return [
     'streamwrapper' => ['context' => 'resource'],
     'tidy' => ['errorBuffer' => 'string'],
     'tidynode' => [
-        'attribute' => 'array',
-        'child' => 'array',
+        'attribute' => '?array<string,string>',
+        'child' => '?non-empty-list<tidyNode>',
         'column' => 'int',
         'id' => 'int',
         'line' => 'int',
